@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// NOTE: SQLite (the local, no-cloud database for this project) does not
+// support native enums or the Json type. To stay faithful to the intended
+// schema we model enum-like fields as `String` and the JSON `steps` field as
+// a `String` of serialized JSON. The allowed values live in `lib/constants.ts`
+// as TypeScript union types so the app stays type-safe.
+
+model Vehicle {
+  id        String        @id @default(cuid())
+  vin       String        @unique
+  plate     String?
+  make      String
+  model     String
+  year      Int
+  color     String?
+  notes     String?
+  clientId  String
+  client    Client        @relation(fields: [clientId], references: [id])
+  orders    RepairOrder[]
+  createdAt DateTime      @default(now())
+}
+
+model Client {
+  id        String    @id @default(cuid())
+  name      String
+  phone     String
+  email     String?
+  vehicles  Vehicle[]
+  createdAt DateTime  @default(now())
+}
+
+model RepairOrder {
+  id          String       @id @default(cuid())
+  vehicleId   String
+  vehicle     Vehicle      @relation(fields: [vehicleId], references: [id])
+  status      String       @default("RECEIVED") // OrderStatus
+  description String
+  notes       String?
+  approved    Boolean      @default(false)
+  lineItems   LineItem[]
+  messages    MessageLog[]
+  qrToken     String       @unique @default(cuid())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model LineItem {
+  id          String      @id @default(cuid())
+  orderId     String
+  order       RepairOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  type        String // LineType: LABOR | PART
+  description String
+  quantity    Float       @default(1)
+  unitPrice   Float
+  partNumber  String?
+}
+
+model MessageLog {
+  id      String      @id @default(cuid())
+  orderId String
+  order   RepairOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  channel String
+  body    String
+  sentAt  DateTime    @default(now())
+}
+
+model Part {
+  id             String  @id @default(cuid())
+  partNumber     String  @unique
+  description    String
+  brand          String?
+  location       String?
+  stock          Int     @default(0)
+  unitCost       Float
+  compatibleWith String?
+}
+
+model RepairGuide {
+  id        String   @id @default(cuid())
+  title     String
+  model     String
+  year      String?
+  category  String
+  steps     String // serialized JSON: Array<{ title, description, warning? }>
+  notes     String?
+  createdAt DateTime @default(now())
+}
