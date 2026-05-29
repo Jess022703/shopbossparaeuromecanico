@@ -15,20 +15,25 @@ repair shop in Puerto Rico. Two interfaces:
 - `qrcode` for QR generation, `@react-pdf/renderer` for estimate PDFs
 - `nodemailer` for automatic client emails (log-only fallback)
 
-## Getting started (local)
+## Getting started (local) — zero config
 
-Requires **Node 18+** and a **PostgreSQL** connection string.
+Only requires **Node 18+**. No database to install, no `.env` to edit — local dev
+uses a self-contained SQLite file.
 
 ```bash
 npm install
-cp .env.example .env        # set POSTGRES_PRISMA_URL + POSTGRES_URL_NON_POOLING
-npm run db:push             # create the schema
-npm run db:seed             # sample data (2 clients, 3 cars, 5 orders, 10 parts, 3 guides)
-npm run dev                 # http://localhost:3000
+npm run local      # creates the SQLite DB, loads sample data, starts the app
 ```
 
-Default staff PIN: **2229** (configurable via `SHOP_PIN`).
-`npm run db:reset` wipes and re-seeds the database (local only).
+Then open **http://localhost:3000**. Staff login PIN: **2229**.
+
+That's it. `npm run local` is the only command you need after install — it builds
+the database, seeds 2 clients / 3 Porsches / 5 orders / 10 parts / 3 guides, and
+launches the dev server. Re-running it keeps your data (the seed skips if data
+already exists). `npm run db:reset` wipes and re-seeds from scratch.
+
+> Local dev uses `prisma/schema.sqlite.prisma` (SQLite). Production/Vercel uses
+> `prisma/schema.prisma` (PostgreSQL). The models are identical in both.
 
 ## Deploy to Vercel (one account, ~5 clicks)
 
