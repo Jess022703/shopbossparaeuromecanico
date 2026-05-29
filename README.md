@@ -15,19 +15,35 @@ repair shop in Puerto Rico. Two interfaces:
 - `qrcode` for QR generation, `@react-pdf/renderer` for estimate PDFs
 - `nodemailer` for automatic client emails (log-only fallback)
 
-## Getting started
+## Getting started (local)
+
+Requires **Node 18+** and a **PostgreSQL** connection string.
 
 ```bash
 npm install
-cp .env.example .env        # adjust SHOP_PIN / SMTP if desired
-npm run db:push             # create the SQLite schema
+cp .env.example .env        # set POSTGRES_PRISMA_URL + POSTGRES_URL_NON_POOLING
+npm run db:push             # create the schema
 npm run db:seed             # sample data (2 clients, 3 cars, 5 orders, 10 parts, 3 guides)
 npm run dev                 # http://localhost:3000
 ```
 
 Default staff PIN: **2229** (configurable via `SHOP_PIN`).
+`npm run db:reset` wipes and re-seeds the database (local only).
 
-`npm run db:reset` wipes and re-seeds the database.
+## Deploy to Vercel (one account, ~5 clicks)
+
+1. Push this repo to GitHub (already done on branch `claude/inspiring-pasteur-WlgB7`).
+2. At **vercel.com** → *Add New → Project* → import this repo.
+3. Open the project → **Storage** tab → *Create Database* → **Postgres**.
+   This auto-creates `POSTGRES_PRISMA_URL` and `POSTGRES_URL_NON_POOLING`.
+4. (Optional) add env vars: `SHOP_PIN`, `NEXT_PUBLIC_BASE_URL`
+   (set to your `https://<app>.vercel.app`), and SMTP_* for real emails.
+5. **Deploy**. The build (see `vercel.json`) runs `prisma db push` + seeds sample
+   data automatically on the first deploy. The seed is **skipped** on later
+   deploys, so your data is never wiped.
+
+The site is then live at `https://<app>.vercel.app` — `/login` (PIN 2229) for the
+shop, `/` and `/guias` public, `/track/<token>` for client tracking.
 
 ## Routes
 
@@ -72,10 +88,10 @@ Default staff PIN: **2229** (configurable via `SHOP_PIN`).
 
 ## Schema note
 
-SQLite supports neither native `enum` nor the `Json` type, so `OrderStatus` /
-`LineType` are stored as `String` and guide `steps` as serialized JSON. The
-allowed values live as TypeScript unions in `lib/constants.ts`, keeping the app
-type-safe. All other models match the project spec.
+`OrderStatus` / `LineType` are stored as `String` and guide `steps` as serialized
+JSON (kept from the original SQLite-compatible design so the schema is portable).
+The allowed values live as TypeScript unions in `lib/constants.ts`, keeping the
+app type-safe. All other models match the project spec.
 
 ## Shop info
 

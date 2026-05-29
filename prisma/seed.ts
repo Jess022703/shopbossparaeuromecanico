@@ -5,6 +5,14 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("🌱 Seeding Euromecanico database...");
 
+  // Safety: never wipe a database that already has data (protects production
+  // on redeploys). Use `npm run db:reset` locally for a full reset.
+  const existing = await prisma.client.count();
+  if (existing > 0) {
+    console.log(`↩️  Database already has ${existing} client(s); skipping seed.`);
+    return;
+  }
+
   // Clean existing data (idempotent seed).
   await prisma.messageLog.deleteMany();
   await prisma.lineItem.deleteMany();

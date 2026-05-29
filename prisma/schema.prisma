@@ -3,15 +3,17 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  // On Vercel, add "Postgres" storage and these env vars are created
+  // automatically. Locally, point them at any Postgres connection string.
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-// NOTE: SQLite (the local, no-cloud database for this project) does not
-// support native enums or the Json type. To stay faithful to the intended
-// schema we model enum-like fields as `String` and the JSON `steps` field as
-// a `String` of serialized JSON. The allowed values live in `lib/constants.ts`
-// as TypeScript union types so the app stays type-safe.
+// NOTE: enum-like fields are modeled as `String` and the guide `steps` field
+// as a `String` of serialized JSON (kept from the original SQLite design so the
+// schema stays stable across databases). The allowed values live in
+// `lib/constants.ts` as TypeScript union types so the app stays type-safe.
 
 model Vehicle {
   id        String        @id @default(cuid())
