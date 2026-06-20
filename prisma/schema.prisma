@@ -1,0 +1,242 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Shop {
+  id             String          @id @default(cuid())
+  name           String
+  city           String
+  taxRate        Float           @default(0.115)
+  laborRateCents Int             @default(14500)
+  customers      Customer[]
+  vehicles       Vehicle[]
+  repairOrders   RepairOrder[]
+  appointments   Appointment[]
+  inventory      InventoryItem[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+model Customer {
+  id           String                  @id @default(cuid())
+  shopId       String
+  shop         Shop                    @relation(fields: [shopId], references: [id])
+  name         String
+  phone        String
+  email        String
+  address      String
+  notes        String?
+  vehicles     Vehicle[]
+  repairOrders RepairOrder[]
+  messages     CustomerCommunication[]
+  createdAt    DateTime                @default(now())
+  updatedAt    DateTime                @updatedAt
+}
+
+model Vehicle {
+  id           String        @id @default(cuid())
+  shopId       String
+  shop         Shop          @relation(fields: [shopId], references: [id])
+  customerId   String
+  customer     Customer      @relation(fields: [customerId], references: [id])
+  vin          String        @unique
+  year         Int
+  make         String
+  model        String
+  trim         String?
+  generation   String?
+  mileage      Int           @default(0)
+  plate        String?
+  repairOrders RepairOrder[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model RepairOrder {
+  id              String        @id @default(cuid())
+  roNumber        String        @unique
+  shopId          String
+  shop            Shop          @relation(fields: [shopId], references: [id])
+  customerId      String
+  customer        Customer      @relation(fields: [customerId], references: [id])
+  vehicleId       String
+  vehicle         Vehicle       @relation(fields: [vehicleId], references: [id])
+  complaint       String
+  status          ROStatus      @default(PENDING)
+  priority        Priority      @default(MEDIUM)
+  laborCents      Int           @default(0)
+  partsCents      Int           @default(0)
+  taxCents        Int           @default(0)
+  totalCents      Int           @default(0)
+  portalToken     String        @unique @default(cuid())
+  approved        Boolean       @default(false)
+  paid            Boolean       @default(false)
+  lineItems       ROLineItem[]
+  dviItems        DVIItem[]
+  invoice         Invoice?
+  events          ROEvent[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+enum ROStatus {
+  PENDING
+  APPROVED
+  IN_PROGRESS
+  WAITING_PARTS
+  QUALITY_CHECK
+  READY
+  COMPLETED
+  INVOICED
+  PAID
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model ROLineItem {
+  id            String       @id @default(cuid())
+  repairOrderId String
+  repairOrder   RepairOrder  @relation(fields: [repairOrderId], references: [id])
+  type          LineItemType
+  description   String
+  quantity      Float        @default(1)
+  unitCostCents Int          @default(0)
+  unitPriceCents Int         @default(0)
+  totalCents    Int          @default(0)
+  approved      Boolean      @default(false)
+  createdAt     DateTime     @default(now())
+}
+
+enum LineItemType {
+  PART
+  LABOR
+  SUBLET
+  FEE
+  DISCOUNT
+}
+
+model DVIItem {
+  id            String      @id @default(cuid())
+  repairOrderId String
+  repairOrder   RepairOrder @relation(fields: [repairOrderId], references: [id])
+  category      String
+  itemName      String
+  status        DVIStatus   @default(NOT_CHECKED)
+  techNotes     String?
+  photos        String[]
+  sortOrder     Int         @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+enum DVIStatus {
+  NOT_CHECKED
+  OK
+  MONITOR
+  URGENT
+}
+
+model Appointment {
+  id           String            @id @default(cuid())
+  shopId       String
+  shop         Shop              @relation(fields: [shopId], references: [id])
+  customerName String
+  customerPhone String?
+  vehicleInfo  String
+  serviceType  String
+  scheduledAt  DateTime
+  status       AppointmentStatus @default(CONFIRMED)
+  notes        String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+model InventoryItem {
+  id             String   @id @default(cuid())
+  shopId         String
+  shop           Shop     @relation(fields: [shopId], references: [id])
+  partNumber     String
+  description    String
+  brand          String
+  quantity       Float    @default(0)
+  minQuantity    Float    @default(1)
+  unitCostCents  Int
+  unitPriceCents Int
+  location       String
+  notes          String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([shopId, partNumber])
+}
+
+model Invoice {
+  id             String        @id @default(cuid())
+  invoiceNumber  String        @unique
+  repairOrderId  String        @unique
+  repairOrder    RepairOrder   @relation(fields: [repairOrderId], references: [id])
+  status         InvoiceStatus @default(DRAFT)
+  totalCents     Int           @default(0)
+  dueDate        DateTime?
+  paidAt         DateTime?
+  stripePaymentUrl String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  VOID
+}
+
+model ROEvent {
+  id            String      @id @default(cuid())
+  repairOrderId String
+  repairOrder   RepairOrder @relation(fields: [repairOrderId], references: [id])
+  eventType     String
+  description   String
+  createdBy     String?
+  createdAt     DateTime    @default(now())
+}
+
+model CustomerCommunication {
+  id          String        @id @default(cuid())
+  customerId  String
+  customer    Customer      @relation(fields: [customerId], references: [id])
+  channel     CommChannel
+  direction   CommDirection
+  body        String
+  status      String?
+  providerId  String?
+  createdAt   DateTime      @default(now())
+}
+
+enum CommChannel {
+  SMS
+  EMAIL
+}
+
+enum CommDirection {
+  OUTBOUND
+  INBOUND
+}

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 160" role="img" aria-labelledby="title">
+  <title id="title">Rear sports car silhouette</title>
+  <defs>
+    <linearGradient id="paint" x1="0" x2="1">
+      <stop stop-color="#050505"/>
+      <stop offset=".52" stop-color="#262626"/>
+      <stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <filter id="redglow" x="-10%" y="-50%" width="120%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <path d="M48 118c6-40 25-72 55-86 24-11 130-11 154 0 30 14 49 46 55 86H48z" fill="url(#paint)" stroke="#2f2f2f" stroke-width="2"/>
+  <path d="M76 89c23 8 185 8 208 0" fill="none" stroke="#3e3e3e" stroke-width="4" stroke-linecap="round"/>
+  <path d="M82 102h196" fill="none" stroke="#f01818" stroke-width="7" stroke-linecap="round" filter="url(#redglow)"/>
+  <path d="M108 118h144" fill="none" stroke="#0b0b0b" stroke-width="10" stroke-linecap="round"/>
+  <path d="M80 128h44M236 128h44" stroke="#161616" stroke-width="14" stroke-linecap="round"/>
+  <path d="M94 138h38M228 138h38" stroke="#080808" stroke-width="8" stroke-linecap="round"/>
+  <path d="M148 116h64" stroke="#111" stroke-width="12" stroke-linecap="round"/>
+  <path d="M160 59h40M170 67h20" stroke="#151515" stroke-width="3" stroke-linecap="round"/>
+</svg>

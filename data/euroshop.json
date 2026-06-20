@@ -1,0 +1,767 @@
+{
+  "shop": {
+    "id": "shop_euromecanico",
+    "name": "Euromecanico Corp",
+    "city": "Sabana Seca, PR",
+    "taxRate": 0.115,
+    "laborRateCents": 14500
+  },
+  "customers": [
+    {
+      "id": "cus_jorge",
+      "name": "Jorge Rivera",
+      "phone": "787-555-0101",
+      "email": "jorge@example.com",
+      "address": "Toa Baja, PR",
+      "createdAt": "2026-06-04T09:30:00.000Z"
+    },
+    {
+      "id": "cus_carlos",
+      "name": "Carlos Morales",
+      "phone": "787-555-0102",
+      "email": "carlos@example.com",
+      "address": "Bayamon, PR",
+      "createdAt": "2026-06-05T15:30:00.000Z"
+    },
+    {
+      "id": "cus_ricardo",
+      "name": "Ricardo Perez",
+      "phone": "787-555-0103",
+      "email": "ricardo@example.com",
+      "address": "Dorado, PR",
+      "createdAt": "2026-06-06T21:30:00.000Z"
+    },
+    {
+      "id": "cus_andres",
+      "name": "Andres Vega",
+      "phone": "787-555-0104",
+      "email": "andres@example.com",
+      "address": "Guaynabo, PR",
+      "createdAt": "2026-06-08T03:30:00.000Z"
+    },
+    {
+      "id": "cus_manuel",
+      "name": "Manuel Arroyo",
+      "phone": "787-555-0105",
+      "email": "manuel@example.com",
+      "address": "San Juan, PR",
+      "createdAt": "2026-06-09T09:30:00.000Z"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "veh_911_turbo",
+      "customerId": "cus_jorge",
+      "vin": "WP0AD2A99JS156781",
+      "year": 2018,
+      "make": "Porsche",
+      "model": "911 Turbo S",
+      "generation": "991.2",
+      "mileage": 32850,
+      "plate": "POR-911",
+      "createdAt": "2026-06-05T05:30:00.000Z"
+    },
+    {
+      "id": "veh_cayenne",
+      "customerId": "cus_carlos",
+      "vin": "WP1AB2AY6LDA30571",
+      "year": 2020,
+      "make": "Porsche",
+      "model": "Cayenne GTS",
+      "generation": "E3",
+      "mileage": 44520,
+      "plate": "CAY-202",
+      "createdAt": "2026-06-06T11:30:00.000Z"
+    },
+    {
+      "id": "veh_carrera",
+      "customerId": "cus_ricardo",
+      "vin": "WP0AB2A91HS123456",
+      "year": 2017,
+      "make": "Porsche",
+      "model": "911 Carrera S",
+      "generation": "991.2",
+      "mileage": 39110,
+      "plate": "991-RP",
+      "createdAt": "2026-06-07T17:30:00.000Z"
+    },
+    {
+      "id": "veh_panamera",
+      "customerId": "cus_andres",
+      "vin": "WP0AA2A75KL123987",
+      "year": 2019,
+      "make": "Porsche",
+      "model": "Panamera 4S",
+      "generation": "971",
+      "mileage": 28200,
+      "plate": "PAN-4S",
+      "createdAt": "2026-06-08T23:30:00.000Z"
+    },
+    {
+      "id": "veh_boxster",
+      "customerId": "cus_manuel",
+      "vin": "WP0CB2A88GS140019",
+      "year": 2016,
+      "make": "Porsche",
+      "model": "Boxster GTS",
+      "generation": "981",
+      "mileage": 50125,
+      "plate": "BOX-GT",
+      "createdAt": "2026-06-09T21:30:00.000Z"
+    }
+  ],
+  "repairOrders": [
+    {
+      "id": "ro_1021",
+      "roNumber": "RO-2026-1021",
+      "customerId": "cus_jorge",
+      "vehicleId": "veh_911_turbo",
+      "complaint": "Oil change service, boost leak inspection and PIWIS scan.",
+      "status": "IN_PROGRESS",
+      "priority": "HIGH",
+      "laborCents": 185000,
+      "partsCents": 250000,
+      "taxCents": 50025,
+      "totalCents": 485025,
+      "portalToken": "demo-token",
+      "approved": true,
+      "paid": false,
+      "createdAt": "2026-06-11T16:30:00.000Z",
+      "updatedAt": "2026-06-11T21:27:36.000Z"
+    },
+    {
+      "id": "ro_1020",
+      "roNumber": "RO-2026-1020",
+      "customerId": "cus_carlos",
+      "vehicleId": "veh_cayenne",
+      "complaint": "Brake inspection and front pad estimate.",
+      "status": "WAITING_PARTS",
+      "priority": "MEDIUM",
+      "laborCents": 72000,
+      "partsCents": 121000,
+      "taxCents": 22195,
+      "totalCents": 215195,
+      "portalToken": "portal-cayenne",
+      "approved": true,
+      "paid": false,
+      "createdAt": "2026-06-11T03:30:00.000Z",
+      "updatedAt": "2026-06-11T21:15:00.000Z"
+    },
+    {
+      "id": "ro_1019",
+      "roNumber": "RO-2026-1019",
+      "customerId": "cus_ricardo",
+      "vehicleId": "veh_carrera",
+      "complaint": "Annual service, spark plugs and bore scope risk check.",
+      "status": "QUALITY_CHECK",
+      "priority": "HIGH",
+      "laborCents": 135000,
+      "partsCents": 156000,
+      "taxCents": 33465,
+      "totalCents": 324465,
+      "portalToken": "portal-carrera",
+      "approved": false,
+      "paid": false,
+      "createdAt": "2026-06-10T21:30:00.000Z",
+      "updatedAt": "2026-06-11T18:30:00.000Z"
+    },
+    {
+      "id": "ro_1018",
+      "roNumber": "RO-2026-1018",
+      "customerId": "cus_andres",
+      "vehicleId": "veh_panamera",
+      "complaint": "AC service and cabin filter.",
+      "status": "IN_PROGRESS",
+      "priority": "MEDIUM",
+      "laborCents": 87000,
+      "partsCents": 90500,
+      "taxCents": 20412,
+      "totalCents": 197912,
+      "portalToken": "portal-panamera",
+      "approved": true,
+      "paid": false,
+      "createdAt": "2026-06-10T09:30:00.000Z",
+      "updatedAt": "2026-06-11T16:30:00.000Z"
+    },
+    {
+      "id": "ro_1017",
+      "roNumber": "RO-2026-1017",
+      "customerId": "cus_manuel",
+      "vehicleId": "veh_boxster",
+      "complaint": "Suspension noise inspection.",
+      "status": "IN_PROGRESS",
+      "priority": "LOW",
+      "laborCents": 78000,
+      "partsCents": 70000,
+      "taxCents": 17020,
+      "totalCents": 165020,
+      "portalToken": "portal-boxster",
+      "approved": true,
+      "paid": false,
+      "createdAt": "2026-06-09T21:30:00.000Z",
+      "updatedAt": "2026-06-11T14:30:00.000Z"
+    }
+  ],
+  "appointments": [
+    {
+      "id": "appt_1",
+      "customerId": "cus_jorge",
+      "customerName": "Jose A.",
+      "vehicleInfo": "2019 911 Carrera",
+      "serviceType": "Servicio de aceite",
+      "scheduledAt": "2026-06-11T08:00:00-04:00",
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "appt_2",
+      "customerId": "cus_carlos",
+      "customerName": "Luis M.",
+      "vehicleInfo": "2021 Cayenne Turbo",
+      "serviceType": "Inspeccion de frenos",
+      "scheduledAt": "2026-06-11T10:00:00-04:00",
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "appt_3",
+      "customerId": "cus_ricardo",
+      "customerName": "Ricardo P.",
+      "vehicleInfo": "2018 Panamera 4S",
+      "serviceType": "Servicio AC",
+      "scheduledAt": "2026-06-11T12:00:00-04:00",
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "appt_4",
+      "customerId": "cus_andres",
+      "customerName": "Andres V.",
+      "vehicleInfo": "2020 Macan S",
+      "serviceType": "Diagnostico PIWIS",
+      "scheduledAt": "2026-06-11T14:00:00-04:00",
+      "status": "PENDING"
+    },
+    {
+      "id": "appt_5",
+      "customerId": "cus_manuel",
+      "customerName": "Manuel A.",
+      "vehicleInfo": "2017 911 GT3",
+      "serviceType": "Revision suspension",
+      "scheduledAt": "2026-06-11T16:00:00-04:00",
+      "status": "PENDING"
+    }
+  ],
+  "inventory": [
+    {
+      "id": "inv_filter_997",
+      "partNumber": "997.107.521.50",
+      "description": "Oil filter 911 997",
+      "brand": "Porsche Genuine",
+      "quantity": 12,
+      "minQuantity": 4,
+      "unitCostCents": 1850,
+      "unitPriceCents": 3295,
+      "location": "A1"
+    },
+    {
+      "id": "inv_oil",
+      "partNumber": "M1-0W40",
+      "description": "Mobil 1 FS 0W-40 liter",
+      "brand": "Mobil 1",
+      "quantity": 52,
+      "minQuantity": 20,
+      "unitCostCents": 1125,
+      "unitPriceCents": 1895,
+      "location": "OIL"
+    },
+    {
+      "id": "inv_plug",
+      "partNumber": "PFR6Q",
+      "description": "NGK spark plug flat-6",
+      "brand": "NGK",
+      "quantity": 24,
+      "minQuantity": 12,
+      "unitCostCents": 1025,
+      "unitPriceCents": 1895,
+      "location": "B3"
+    },
+    {
+      "id": "inv_brake",
+      "partNumber": "DOT4-LV",
+      "description": "DOT 4 LV brake fluid",
+      "brand": "Pentosin",
+      "quantity": 18,
+      "minQuantity": 6,
+      "unitCostCents": 1400,
+      "unitPriceCents": 2495,
+      "location": "FLUID"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "inv_1015",
+      "invoiceNumber": "INV-2026-1015",
+      "repairOrderId": "ro_1021",
+      "status": "SENT",
+      "totalCents": 485025,
+      "dueDate": "2026-06-18T17:00:00-04:00"
+    }
+  ],
+  "activities": [
+    {
+      "id": "act_5j371h7i",
+      "label": "Grupo de contactos creado: 30 clientes (33)",
+      "createdAt": "2026-06-18T13:48:12.187Z"
+    },
+    {
+      "id": "act_frns59cq",
+      "label": "Grupo de contactos creado: ultima prueba (9)",
+      "createdAt": "2026-06-18T13:46:20.403Z"
+    },
+    {
+      "id": "act_atlckafp",
+      "label": "Grupo de contactos creado: prueba (8)",
+      "createdAt": "2026-06-16T14:33:06.097Z"
+    },
+    {
+      "id": "act_485rfb73",
+      "label": "Grupo de contactos creado: Prueba 6 meses (4)",
+      "createdAt": "2026-06-16T14:15:14.357Z"
+    },
+    {
+      "id": "act_1",
+      "label": "RO-2026-1021 cambio a En proceso",
+      "createdAt": "2026-06-11T21:27:36.000Z"
+    },
+    {
+      "id": "act_2",
+      "label": "Nueva cita para 2021 Cayenne Turbo",
+      "createdAt": "2026-06-11T21:15:00.000Z"
+    },
+    {
+      "id": "act_3",
+      "label": "Factura INV-2026-1015 enviada a Jorge R.",
+      "createdAt": "2026-06-11T20:30:00.000Z"
+    },
+    {
+      "id": "act_4",
+      "label": "Orden de partes PO-2026-1008 recibida",
+      "createdAt": "2026-06-11T19:30:00.000Z"
+    },
+    {
+      "id": "act_5",
+      "label": "RO-2026-1019 paso a DVI",
+      "createdAt": "2026-06-11T18:30:00.000Z"
+    }
+  ],
+  "contactGroups": [
+    {
+      "id": "grp_jlf6y5k5",
+      "name": "30 clientes",
+      "createdAt": "2026-06-18T13:48:12.187Z",
+      "contacts": [
+        {
+          "name": "SEVERO RODRIGUEZ",
+          "phone": "7876647665",
+          "email": "SEVERORODRIGUEZ1972@GMAIL.COM",
+          "vehicle": "2008 PORSCHE 911 CARRERA S COUPE COUPE 2 DR",
+          "sentAt": "2026-06-18T17:37:22.115Z"
+        },
+        {
+          "name": "JOSUE ERAZO",
+          "phone": "7874158008",
+          "email": "JOSUE_ERAZO34@HOTMAIL.COM",
+          "vehicle": "2010 PORSCHE PANAMERA S SEDAN 4 DR",
+          "sentAt": "2026-06-18T17:37:24.570Z"
+        },
+        {
+          "name": "STEVEN RODRIGUEZ",
+          "phone": "7875987928",
+          "email": "STEVENRODRIGUEZSAURE@GMAIL.COM",
+          "vehicle": "2008 PORSCHE CAYMAN S COUPE 2 DR",
+          "sentAt": "2026-06-18T17:37:27.028Z"
+        },
+        {
+          "name": "EDGAR RODRIGUEZ",
+          "phone": "7872207180",
+          "email": "RODRIGUEZCARDONA13@YAHOO.COM",
+          "vehicle": "2014 PORSCHE PANAMERA HYBRID S E HYBRID SEDAN 4 DR",
+          "sentAt": "2026-06-18T17:37:29.484Z"
+        },
+        {
+          "name": "ERICK RODRIGUEZ",
+          "phone": "9394059307",
+          "email": "VAYASFABIOLA03@GMAIL.COM",
+          "vehicle": "2014 PORSCHE CAYENNE S SPORT UTILITY 4 DR",
+          "sentAt": "2026-06-18T17:37:31.939Z"
+        },
+        {
+          "name": "MIGUEL RIOS",
+          "phone": "7875797210",
+          "email": "MARIOS29US@YAHOO.COM",
+          "vehicle": "2021 PORSCHE PANAMERA 4 E HYBRID",
+          "sentAt": "2026-06-18T17:37:34.411Z"
+        },
+        {
+          "name": "VICTOR TORRES",
+          "phone": "7873743948",
+          "email": "NICKMENTAA@GMAIL.COM",
+          "vehicle": "1997 PORSCHE BOXSTER",
+          "sentAt": "2026-06-18T17:37:36.639Z"
+        },
+        {
+          "name": "JERRY VAZQUEZ",
+          "phone": "7874059010",
+          "email": "GALEMONTECRISTO@GMAIL.COM",
+          "vehicle": "2018 PORSCHE CAYMAN",
+          "sentAt": "2026-06-18T17:37:38.793Z"
+        },
+        {
+          "name": "RICARDO PEREZ",
+          "phone": "7876882832",
+          "email": "RPEREZROBLES@YAHOO.COM",
+          "vehicle": "2012 PORSCHE PANAMERA TURBO TURBO 4",
+          "sentAt": "2026-06-18T17:37:41.074Z"
+        },
+        {
+          "name": "EDWARD BENAVENT",
+          "phone": "7879493515",
+          "email": "KIT.BENAVENT@GMAIL.COM",
+          "vehicle": "2001 PORSCHE BOXSTER S CONVERTIBLE 2 DR",
+          "sentAt": "2026-06-18T17:37:43.717Z"
+        },
+        {
+          "name": "XAVIER GONZALES",
+          "phone": "7876627217",
+          "email": "XAVIERGONZALEZ437@GMAIL.COM",
+          "vehicle": "2016 PORSCHE PANAMERA SE HYBRID",
+          "sentAt": "2026-06-18T17:37:45.982Z"
+        },
+        {
+          "name": "CARLOS MORALES",
+          "phone": "7876302484",
+          "email": "MASTERLINKCORP@YAHOO.COM",
+          "vehicle": "2008 PORSCHE 911 TURBO GT2",
+          "sentAt": "2026-06-18T17:37:48.462Z"
+        },
+        {
+          "name": "EWAR RIVERA",
+          "phone": "7873063020",
+          "email": "EWAR.A.RIVERA@GMAIL.COM",
+          "vehicle": "2018 PORSCHE MACAN",
+          "sentAt": "2026-06-18T17:37:50.833Z"
+        },
+        {
+          "name": "IVELISSE SANTIAGO VARGAS IVELISSE",
+          "phone": "7878101477",
+          "email": "AQR827@YAHOO.COM",
+          "vehicle": "2018 PORSCHE MACAN",
+          "sentAt": "2026-06-18T17:37:53.269Z"
+        },
+        {
+          "name": "EDGARDO RIVERA",
+          "phone": "7875794675",
+          "email": "RIVERAECONDE@GMAIL.COM",
+          "vehicle": "2009 PORSCHE 911 CARRERA 4S CABRIOLET CONVERTIBLE 2 DR",
+          "sentAt": "2026-06-18T17:37:55.475Z"
+        },
+        {
+          "name": "ALEXIS TORRES RODRIGUEZ",
+          "phone": "7874486444",
+          "email": "SPOCKWEB@HOTMAIL.COM",
+          "vehicle": "2017 PORSCHE CAYENNE SE HYBRID PLATINU",
+          "sentAt": "2026-06-18T17:37:57.518Z"
+        },
+        {
+          "name": "ANGEL SOTO",
+          "phone": "7876428869",
+          "email": "ASOTOATLANTIC@HOTMAIL.COM",
+          "vehicle": "1999 PORSCHE 911 CARRERA CARRERA 4",
+          "sentAt": "2026-06-18T17:37:59.896Z"
+        },
+        {
+          "name": "ANGEL SOTO",
+          "phone": "7876190664",
+          "email": "ASOTO@GRUPOVL.COM",
+          "vehicle": "2006 PORSCHE CAYENNE BASE SPORT UTILITY 4 DR",
+          "sentAt": "2026-06-18T17:38:02.372Z"
+        },
+        {
+          "name": "JORGE CEDENO",
+          "phone": "7875182393",
+          "email": "JCE19972002@HOTMAIL.COM",
+          "vehicle": "2005 PORSCHE BOXSTER BASE CONVERTIBLE 2 DR",
+          "sentAt": "2026-06-18T17:38:04.503Z"
+        },
+        {
+          "name": "RAFAEL ROSARIO",
+          "phone": "7873808214",
+          "email": "RROSARIOCORP@GMAIL.COM",
+          "vehicle": "2014 PORSCHE 911 CARRERA S COUPE COUPE 2 DR",
+          "sentAt": "2026-06-18T17:38:06.703Z"
+        },
+        {
+          "name": "ANGEL ROSARIO",
+          "phone": "7872439163",
+          "email": "ROSARIOTOWING2009@HOTMAIL.COM",
+          "vehicle": "2009 PORSCHE CAYENNE BASE SPORT UTILITY 4 DR",
+          "sentAt": "2026-06-18T17:38:09.127Z"
+        },
+        {
+          "name": "GLORIA OLIVERA",
+          "phone": "7873496796",
+          "email": "GLORIAO_2008@LIVE.COM",
+          "vehicle": "2006 PORSCHE CAYENNE BASE SPORT UTILITY 4 DR",
+          "sentAt": "2026-06-18T17:38:11.194Z"
+        },
+        {
+          "name": "MIGUEL MONZON",
+          "phone": "7872311641",
+          "email": "SEGUROSMONZON@GMAIL.COM",
+          "vehicle": "2019 PORSCHE MACAN",
+          "sentAt": "2026-06-18T17:38:13.585Z"
+        },
+        {
+          "name": "JOSE RODRIGUEZ",
+          "phone": "7876407379",
+          "email": "JOSEUFO69.JR@GMAIL.COM",
+          "vehicle": "2014 PORSCHE CAYMAN",
+          "sentAt": "2026-06-18T17:38:16.181Z"
+        },
+        {
+          "name": "CARLOS DIAZ",
+          "phone": "7876337647",
+          "email": "CDIAZELECTRICAL1@GMAIL.COM",
+          "vehicle": "2016 PORSCHE MACAN TURBO",
+          "sentAt": "2026-06-18T17:38:18.758Z"
+        },
+        {
+          "name": "ELISEO RIVERA",
+          "phone": "7879056464",
+          "email": "ELISEOSKYEVENTS@YAHOO.COM",
+          "vehicle": "2012 PORSCHE CAYENNE BASE SPORT UTILITY 4 DR",
+          "sentAt": "2026-06-18T17:38:20.991Z"
+        },
+        {
+          "name": "NELSON SILVERIO",
+          "phone": "7875798800",
+          "email": "NCSILVERIO@FORMALINSURANCE.COM",
+          "vehicle": "2004 PORSCHE 911 CARRERA COUPE COUPE 2 DR",
+          "sentAt": "2026-06-18T17:38:23.383Z"
+        },
+        {
+          "name": "RAMON GARCIA FLORES",
+          "phone": "7876076627",
+          "email": "RG1439190@GMAIL.COM",
+          "vehicle": "2015 PORSCHE BOXSTER",
+          "sentAt": "2026-06-18T17:38:25.749Z"
+        },
+        {
+          "name": "STEPHEN HIGUERA",
+          "phone": "7876977898",
+          "email": "STEPHENHIGUERA@HOTMAIL.COM",
+          "vehicle": "2014 PORSCHE 911 TURBO CABRIOLET CONVERTIBLE 2 DR",
+          "sentAt": "2026-06-18T17:38:28.069Z"
+        },
+        {
+          "name": "JORGE PELEGRINA",
+          "phone": "7874481080",
+          "email": "PELEGRINAJORGE@GMAIL.COM",
+          "vehicle": "2018 PORSCHE PANAMERA 4 E HYBRID",
+          "sentAt": "2026-06-18T17:38:30.941Z"
+        },
+        {
+          "name": "CARLOS AYALA",
+          "phone": "7875136247",
+          "email": "CARLORAFA.21@GMAIL.COM",
+          "vehicle": "1996 PORSCHE 911 CARRERA 4 COUPE 2 DR",
+          "sentAt": "2026-06-18T17:38:35.366Z"
+        },
+        {
+          "name": "CARLOS AYALA",
+          "phone": "7875136247",
+          "email": "CARLORAFA.21@GMAIL.COM",
+          "vehicle": "2015 PORSCHE 911 TURBO TURBO S",
+          "sentAt": "2026-06-18T17:38:35.366Z"
+        },
+        {
+          "name": "PAUL LOPEZ",
+          "phone": "1646831777",
+          "email": "PAUL.S.LOPEZ@GMAIL.COM",
+          "vehicle": "2018 PORSCHE CAYENNE HYBRID S SPORT UTILITY 4 DR",
+          "sentAt": "2026-06-18T17:38:37.469Z"
+        }
+      ],
+      "subject": "Recordatorio de mantenimiento - {vehiculo}",
+      "body": "Buenos días, {nombre}.\r\n\r\nLe contactamos de parte de Euromecanico Corp para informarle que, según nuestros registros, su {vehiculo} está próximo a requerir mantenimiento.\r\n\r\nPara agendar su cita, puede comunicarse con nosotros al {telefono}. Será un placer continuar brindándole el servicio de excelencia que merece.\r\n\r\n— Euromecanico Corp"
+    },
+    {
+      "id": "grp_69ncg202",
+      "name": "ultima prueba",
+      "createdAt": "2026-06-18T13:46:20.403Z",
+      "contacts": [
+        {
+          "name": "Jesiel Jimenez",
+          "phone": "",
+          "email": "jesielnjimenez@gmail.com",
+          "vehicle": "Porsche 911 Carrera",
+          "sentAt": "2026-06-18T17:34:19.643Z"
+        },
+        {
+          "name": "Jesiel",
+          "phone": "",
+          "email": "Jesiel@euromecanicocorp.com",
+          "vehicle": "Porsche Cayenne GTS",
+          "sentAt": "2026-06-18T17:34:22.136Z"
+        },
+        {
+          "name": "Victor",
+          "phone": "",
+          "email": "Victorfont123@gmail.com",
+          "vehicle": "Porsche Boxster S",
+          "sentAt": "2026-06-18T17:34:24.459Z"
+        },
+        {
+          "name": "gabriela",
+          "phone": "",
+          "email": "gabriela.bustelo@yahoo.com",
+          "vehicle": "Porsche Macan Turbo",
+          "sentAt": "2026-06-18T17:34:26.921Z"
+        },
+        {
+          "name": "Christian",
+          "phone": "",
+          "email": "Moraleschristian880@gmail.com",
+          "vehicle": "Porsche Panamera 4S",
+          "sentAt": "2026-06-18T17:34:29.474Z"
+        },
+        {
+          "name": "Frances",
+          "phone": "",
+          "email": "canela.frances@hotmail.com",
+          "vehicle": "Porsche 718 Cayman",
+          "sentAt": "2026-06-18T17:34:31.949Z"
+        },
+        {
+          "name": "Ruthy",
+          "phone": "",
+          "email": "ruqui.mercado18@gmail.com",
+          "vehicle": "Porsche Taycan 4S",
+          "sentAt": "2026-06-18T17:34:34.188Z"
+        },
+        {
+          "name": "luis",
+          "phone": "",
+          "email": "scorpion2103pr@gmail.com",
+          "vehicle": "Porsche 911 Turbo S",
+          "sentAt": "2026-06-18T17:34:36.489Z"
+        },
+        {
+          "name": "cesar",
+          "phone": "",
+          "email": "cesar.ortiz072009@gmail.com",
+          "vehicle": "Porsche Cayman GT4",
+          "sentAt": "2026-06-18T17:34:38.810Z"
+        }
+      ],
+      "subject": "Recordatorio de mantenimiento - {vehiculo}",
+      "body": "Buenos días, {nombre}.\r\n\r\nLe contactamos de parte de Euromecanico Corp para informarle que, según nuestros registros, su {vehiculo} está próximo a requerir mantenimiento.\r\n\r\nPara una cita, puede comunicarse con nosotros al {telefono} O utilizar nuestra pagina web euromecanicocorp.com. Será un placer continuar brindándole el servicio de excelencia que merece.\r\n\r\n— Euromecanico Corp"
+    },
+    {
+      "id": "grp_oxsxwch5",
+      "name": "prueba",
+      "createdAt": "2026-06-16T14:33:06.097Z",
+      "contacts": [
+        {
+          "name": "Jesiel Jimenez",
+          "phone": "",
+          "email": "jesielnjimenez@gmail.com",
+          "vehicle": "",
+          "sentAt": "2026-06-16T15:21:05.605Z"
+        },
+        {
+          "name": "Jesiel",
+          "phone": "",
+          "email": "Jesiel@euromecanicocorp.com",
+          "vehicle": "",
+          "sentAt": "2026-06-16T15:21:07.669Z"
+        },
+        {
+          "name": "Victor",
+          "phone": "",
+          "email": "Victorfont123@gmail.com",
+          "vehicle": "",
+          "sentAt": "2026-06-16T15:21:09.735Z"
+        },
+        {
+          "name": "gabriela",
+          "phone": "",
+          "email": "gabriela.bustelo@yahoo.com",
+          "vehicle": "",
+          "sentAt": "2026-06-16T15:21:11.851Z"
+        },
+        {
+          "name": "Christian",
+          "phone": "",
+          "email": "Moraleschristian880@gmail.com",
+          "vehicle": "",
+          "sentAt": "2026-06-16T15:21:14.179Z"
+        },
+        {
+          "name": "Frances",
+          "phone": "",
+          "email": "canela.frances@hotmail.com",
+          "vehicle": "",
+          "sentAt": "2026-06-16T15:21:16.172Z"
+        },
+        {
+          "name": "Ruthy",
+          "phone": "",
+          "email": "ruqui.mercado18@gmail.com",
+          "vehicle": "",
+          "sentAt": "2026-06-16T15:21:18.329Z"
+        },
+        {
+          "name": "luis",
+          "phone": "",
+          "email": "scorpion2103pr@gmail.com",
+          "vehicle": "",
+          "sentAt": "2026-06-16T15:21:20.383Z"
+        }
+      ],
+      "subject": "Recordatorio de mantenimiento - {vehiculo}",
+      "body": "Hola {nombre},\r\n\r\nLe escribimos desde EUROMECANICO CORP para recordarle que su {vehiculo} esta proximo a cumplir su intervalo de mantenimiento recomendado (aproximadamente cada 6 meses).\r\n\r\nMantener el servicio al dia ayuda a preservar el rendimiento, la fiabilidad y el valor de su Porsche. Con gusto coordinamos una cita cuando mejor le convenga.\r\n\r\nPara agendar, llamenos al {telefono}."
+    },
+    {
+      "id": "grp_in8kchrg",
+      "name": "Prueba 6 meses",
+      "createdAt": "2026-06-16T14:15:14.357Z",
+      "contacts": [
+        {
+          "name": "JORGE RIVERA",
+          "phone": "787-555-0101",
+          "email": "jorge@example.com",
+          "vehicle": "2013 PORSCHE CAYENNE TURBO"
+        },
+        {
+          "name": "MARIA SANTOS",
+          "phone": "787-555-0102",
+          "email": "maria@example.com",
+          "vehicle": "2019 PORSCHE 911 CARRERA S"
+        },
+        {
+          "name": "ANA TORRES",
+          "phone": "787-555-0104",
+          "email": "ana@example.com",
+          "vehicle": "2016 PORSCHE BOXSTER GTS"
+        },
+        {
+          "name": "LUIS DIAZ",
+          "phone": "787-555-0105",
+          "email": "luis@example.com",
+          "vehicle": "2021 PORSCHE PANAMERA 4S"
+        }
+      ],
+      "subject": "Recordatorio - {vehiculo}",
+      "body": "Hola {nombre}, su {vehiculo} necesita servicio. Llame al {telefono}."
+    }
+  ]
+}
