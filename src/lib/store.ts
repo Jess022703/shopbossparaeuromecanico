@@ -38,16 +38,26 @@ export async function getDashboardData() {
   const activeStatuses = ["PENDING", "APPROVED", "IN_PROGRESS", "WAITING_PARTS", "QUALITY_CHECK", "READY"];
   const activeOrders = data.repairOrders.filter((order) => activeStatuses.includes(order.status));
   const inventoryValue = data.inventory.reduce((sum, item) => sum + item.quantity * item.unitCostCents, 0);
-  const today = "2026-06-11";
+  const dateInShopTimezone = (value: Date | string) =>
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Puerto_Rico",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).format(new Date(value));
+  const today = dateInShopTimezone(new Date());
+  const appointmentsToday = data.appointments.filter(
+    (appointment) => dateInShopTimezone(appointment.scheduledAt) === today
+  );
 
   return {
     ...data,
     metrics: {
-      revenueCents: data.repairOrders.reduce((sum, order) => sum + order.totalCents, 0),
+      revenueCents: activeOrders.reduce((sum, order) => sum + order.totalCents, 0),
       activeOrders: activeOrders.length,
       highPriority: activeOrders.filter((order) => order.priority === "HIGH").length,
-      appointmentsToday: data.appointments.filter((appointment) => appointment.scheduledAt.startsWith(today)).length,
-      confirmedAppointments: data.appointments.filter((appointment) => appointment.status === "CONFIRMED").length,
+      appointmentsToday: appointmentsToday.length,
+      confirmedAppointments: appointmentsToday.filter((appointment) => appointment.status === "CONFIRMED").length,
       inventoryValueCents: inventoryValue,
       inventoryItems: data.inventory.length
     }
@@ -123,6 +133,20 @@ export async function updateRepairOrderStatus(idOrRoNumber: string, status: Repa
   order.status = status;
   order.updatedAt = new Date().toISOString();
   data.activities.unshift({ id: id("act"), label: `${order.roNumber} cambio a ${status}`, createdAt: order.updatedAt });
+  await writeData(data);
+  return order;
+}
+
+export async function approveRepairOrder(token: string) {
+  const data = await readData();
+  const order = data.repairOrders.find((item) => item.portalToken === token);
+  if (!order) return null;
+
+  const now = new Date().toISOString();
+  order.approved = true;
+  if (order.status === "PENDING") order.status = "APPROVED";
+  order.updatedAt = now;
+  data.activities.unshift({ id: id("act"), label: `${order.roNumber} aprobado por el cliente`, createdAt: now });
   await writeData(data);
   return order;
 }

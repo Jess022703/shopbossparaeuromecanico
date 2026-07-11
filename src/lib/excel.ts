@@ -11,7 +11,7 @@ function cellText(cell: Cell): string {
 
   if (typeof value === "object") {
     // Hyperlink (ej: celdas de email), formula con resultado, o rich text.
-    const obj = value as Record<string, unknown>;
+    const obj = value as unknown as Record<string, unknown>;
     if (typeof obj.text === "string") return obj.text.trim();
     if (Array.isArray(obj.richText)) {
       return obj.richText.map((part) => String((part as { text?: string }).text ?? "")).join("").trim();

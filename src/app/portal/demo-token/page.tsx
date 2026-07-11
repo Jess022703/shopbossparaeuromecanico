@@ -4,7 +4,12 @@ import { StatusBadge } from "@/components/ui/status-badge";
 import { formatCurrency } from "@/lib/format";
 import { getPortalData } from "@/lib/store";
 
-export default async function PortalDemoPage() {
+export default async function PortalDemoPage({
+  searchParams
+}: {
+  searchParams: Promise<Record<string, string | undefined>>;
+}) {
+  const flash = await searchParams;
   const data = await getPortalData("demo-token");
   if (!data) notFound();
 
@@ -32,7 +37,15 @@ export default async function PortalDemoPage() {
           <div className="mini-card"><StatusBadge value="PENDING" /><strong>Coolant crossover</strong><span className="muted">Monitorear en proximo servicio.</span></div>
           <div className="mini-card"><StatusBadge value="HIGH" /><strong>Boost leak</strong><span className="muted">Requiere aprobacion para prueba de humo.</span></div>
         </div>
-        <button className="button" style={{ marginTop: 18 }}>Aprobar estimado</button>
+        {flash.approved && <div className="alert ok" style={{ marginTop: 18 }}>Estimado aprobado correctamente.</div>}
+        {data.order.approved ? (
+          <button className="button" style={{ marginTop: 18 }} disabled>Estimado aprobado</button>
+        ) : (
+          <form action="/api/portal/approve" method="post">
+            <input type="hidden" name="token" value={data.order.portalToken} />
+            <button className="button" type="submit" style={{ marginTop: 18 }}>Aprobar estimado</button>
+          </form>
+        )}
       </section>
     </main>
   );
